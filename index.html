@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ride Form</title>
+    <style>
+        :root {
+            --bg: #0e1014;
+            --panel: #151823;
+            --text: #e6e8ef;
+            --muted: #9aa0ad;
+            --accent: #5aa7ff;
+            --error: #ff6b6b;
+            --border: #2a3140;
+            --focus: #93c5fd;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            background: radial-gradient(circle at 20% -10%, #1a2030 0%, #0e1014 60%), #0e1014;
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        h1 {
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            margin: 0 0 1.25rem;
+        }
+
+        form {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)), var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.25rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+        }
+
+        fieldset {
+            border: 0;
+            padding: 0;
+            margin: 0 0 1rem;
+        }
+
+        legend {
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.9rem;
+        }
+
+        @media (min-width: 640px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        label {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .input-unit {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            background: #0f1320;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 0.75rem 0.8rem;
+            background: transparent;
+            color: var(--text);
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .unit {
+            padding: 0.75rem 0.75rem;
+            color: var(--muted);
+            border-left: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        input:focus,
+        select:focus {
+            box-shadow: inset 0 0 0 2px var(--focus);
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
+        }
+
+        button {
+            appearance: none;
+            border: 1px solid var(--border);
+            background: #0f1320;
+            color: var(--text);
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 80ms ease, background 120ms ease, border-color 120ms ease;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            border-color: #3a4357;
+            background: #13182a;
+        }
+
+        .secondary {
+            background: transparent;
+        }
+
+        .error {
+            color: var(--error);
+            font-size: 0.88rem;
+            min-height: 1.1rem;
+        }
+
+        #result {
+            display: block;
+            margin-top: 0.75rem;
+            color: var(--muted);
+        }
+
+        [aria-invalid="true"] {
+            box-shadow: inset 0 0 0 2px rgba(255, 107, 107, 0.6);
+        }
+
+        small.hint {
+            color: var(--muted);
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Ride Details</h1>
+        <form id="ride-form" novalidate>
+            <fieldset>
+                <legend>Rider</legend>
+                <div class="grid">
+                    <div class="field"> <label for="age">Age</label>
+                        <div class="input-unit"> <input id="age" name="age" type="number" inputmode="numeric" min="1"
+                                max="120" required placeholder="e.g., 34" /> <span class="unit">years</span> </div>
+                        <div class="error" aria-live="polite"></div>
+                    </div>
+                    text
+
+
+                    <div class="field">
+                        <label for="sex">Sex</label>
+                        <select id="sex" name="sex" required>
+                            <option value="" disabled selected>Select...</option>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Intersex">Intersex</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                        <div class="error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="field">
+                        <label for="weight">Weight</label>
+                        <div class="input-unit">
+                            <input id="weight" name="weight" type="number" inputmode="decimal" min="20" max="300"
+                                step="0.1" required placeholder="e.g., 72.5" />
+                            <span class="unit">kg</span>
+                        </div>
+                        <div class="error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="field">
+                        <label for="height">Height</label>
+                        <div class="input-unit">
+                            <input id="height" name="height" type="number" inputmode="decimal" min="100" max="250"
+                                step="0.5" required placeholder="e.g., 175" />
+                            <span class="unit">cm</span>
+                        </div>
+                        <div class="error" aria-live="polite"></div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Ride</legend>
+                <div class="grid">
+                    <div class="field">
+                        <label for="distance">Ride distance</label>
+                        <div class="input-unit">
+                            <input id="distance" name="distance" type="number" inputmode="decimal" min="0.1" max="1000"
+                                step="0.1" required placeholder="e.g., 25.0" />
+                            <span class="unit">km</span>
+                        </div>
+                        <div class="error" aria-live="polite"></div>
+                    </div>
+
+                    <div class="field">
+                        <label for="time">Ride time</label>
+                        <div class="input-unit">
+                            <input id="time" name="time" type="number" inputmode="numeric" min="1" max="10000" step="1"
+                                required placeholder="e.g., 75" />
+                            <span class="unit">min</span>
+                        </div>
+                        <div class="error" aria-live="polite"></div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="actions">
+                <button type="submit">Submit</button>
+                <button type="reset" class="secondary">Reset</button>
+            </div>
+            <output id="result" role="status" aria-live="polite"></output>
+        </form>
+    </main>
+    <script> const form = document.getElementById('ride-form'); const resultEl = document.getElementById('result'); function setError(inputEl, msg) { const field = inputEl.closest('.field'); const err = field.querySelector('.error'); if (msg) { err.textContent = msg; inputEl.setAttribute('aria-invalid', 'true'); } else { err.textContent = ''; inputEl.removeAttribute('aria-invalid'); } } function validate() { let ok = true; const F = form; // Clear previous errors F.querySelectorAll('input, select').forEach(el => setError(el, '')); if (!F.age.value) { setError(F.age, 'Age is required.'); ok = false; } else if (F.age.value < 1 || F.age.value > 120) { setError(F.age, 'Enter a valid age (1–120).'); ok = false; } if (!F.sex.value) { setError(F.sex, 'Please select an option.'); ok = false; } if (!F.weight.value) { setError(F.weight, 'Weight is required.'); ok = false; } else if (F.weight.value < 20 || F.weight.value > 300) { setError(F.weight, 'Weight should be 20–300 kg.'); ok = false; } if (!F.height.value) { setError(F.height, 'Height is required.'); ok = false; } else if (F.height.value < 100 || F.height.value > 250) { setError(F.height, 'Height should be 100–250 cm.'); ok = false; } if (!F.distance.value) { setError(F.distance, 'Distance is required.'); ok = false; } else if (F.distance.value <= 0) { setError(F.distance, 'Distance must be greater than 0.'); ok = false; } if (!F.time.value) { setError(F.time, 'Time is required.'); ok = false; } else if (F.time.value <= 0) { setError(F.time, 'Time must be greater than 0.'); ok = false; } // Sanity check: unrealistic speed if (ok) { const km = parseFloat(F.distance.value); const min = parseFloat(F.time.value); const kph = km / (min / 60); if (kph > 120) { setError(F.distance, 'Distance/time imply unrealistic speed.'); setError(F.time, 'Distance/time imply unrealistic speed.'); ok = false; } } return ok; } form.addEventListener('submit', async (e) => { e.preventDefault(); if (!validate()) return; const payload = { age: Number(form.age.value), sex: form.sex.value, weightKg: Number(form.weight.value), heightCm: Number(form.height.value), rideDistanceKm: Number(form.distance.value), rideTimeMin: Number(form.time.value) }; resultEl.textContent = 'Submitting...'; try { // Example: send to your backend // const res = await fetch('/api/rides', { // method: 'POST', // headers: { 'Content-Type': 'application/json' }, // body: JSON.stringify(payload) // }); // const data = await res.json(); // Demo: compute and display basic metrics const pace = (payload.rideTimeMin / payload.rideDistanceKm).toFixed(1); const kph = (payload.rideDistanceKm / (payload.rideTimeMin / 60)).toFixed(1); resultEl.textContent = `Saved. Avg speed: ${kph} km/h • Pace: ${pace} min/km`; console.log('Form payload:', payload); } catch (err) { console.error(err); resultEl.textContent = 'Submission failed. Please try again.'; } }); form.addEventListener('reset', () => { resultEl.textContent = ''; form.querySelectorAll('.error').forEach(el => (el.textContent = '')); form.querySelectorAll('[aria-invalid="true"]').forEach(el => el.removeAttribute('aria-invalid')); }); </script>
+</body>
+
+</html>
