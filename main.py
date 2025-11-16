@@ -23,11 +23,34 @@ def main():
     print("Let's go on a hypothetical ride")
     distance = input("Enter the distance of the ride: ")
     elevation_gain = input("Enter the elevation gain of the ride: ")
-    ride = f"The distance of the ride is {distance}, the elevation gain is {elevation_gain}"
+    ride_time = input("Enter the ride time in minutes: ")
+    ride = f"The distance of the ride is {distance}, the elevation gain is {elevation_gain}, the ride time is {ride_time} minutes"
 
     # Generate the model result
-    model_result = "1000 kcal"
+    model_result = []
+    fake_noticiation_1 = f"Timestamp: 00:20, kcal: 100, water: 100ml"
+    fake_noticiation_2 = f"Timestamp: 00:30, kcal: 200, water: 200ml"
+    fake_noticiation_3 = f"Timestamp: 00:50, kcal: 150, water: 50ml"
+    fake_noticiation_4 = f"Timestamp: 01:10, kcal: 200, water: 100ml"
+    fake_noticiation_5 = f"Timestamp: 01:30, kcal: 250, water: 150ml"
+    fake_noticiation_6 = f"Timestamp: 01:50, kcal: 300, water: 200ml"
+    fake_noticiation_7 = f"Timestamp: 02:10, kcal: 350, water: 250ml"
+    fake_noticiation_8 = f"Timestamp: 02:30, kcal: 400, water: 300ml"
+    fake_noticiation_9 = f"Timestamp: 02:50, kcal: 450, water: 350ml"
+    fake_noticiation_10 = f"Timestamp: 03:10, kcal: 500, water: 400ml"
 
+    model_result.append(fake_noticiation_1)
+    model_result.append(fake_noticiation_2)
+    model_result.append(fake_noticiation_3)
+    model_result.append(fake_noticiation_4)
+    model_result.append(fake_noticiation_5)
+    model_result.append(fake_noticiation_6)
+    model_result.append(fake_noticiation_7)
+    model_result.append(fake_noticiation_8)
+    model_result.append(fake_noticiation_9)
+    model_result.append(fake_noticiation_10)
+
+    
     api_key = os.environ.get("GEMINI_API_KEY")
     client = genai.Client(api_key=api_key)
 
