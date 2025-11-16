@@ -11,18 +11,7 @@ from call_function import available_functions, call_function
 
 def main():
     load_dotenv()
-
     verbose = "--verbose" in sys.argv
-    # args = []
-    # for arg in sys.argv[1:]:
-    #     if not arg.startswith("--"):
-    #         args.append(arg)
-
-    # if not args:
-    #     print("AI Code Assistant")
-    #     print('Usage: python main.py "your prompt here" [--verbose]')
-    #     print('Example: python main.py "How do I fix the calculator?"')
-    #     sys.exit(1)
 
     print("Before the ride questionnaire")
     age = input("Enter your age: ")
@@ -43,9 +32,6 @@ def main():
     client = genai.Client(api_key=api_key)
 
     user_prompt = " ".join(model_result)
-
-    # if verbose:
-    #     print(f'User prompt: {user_prompt}\n')
 
     messages = [
         types.Content(
