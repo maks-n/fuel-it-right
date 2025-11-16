@@ -150,3 +150,15 @@ if __name__ == '__main__':
         cal_burn_model = pickle.load(f)
     
     prediction_df, predicted_burn = make_realtime_prediction(cal_burn_model, df_test)
+
+    with open('predicted_calorie_burn_test01.csv', 'w') as f:
+        prediction_df.to_csv(f)
+
+    # 2. Plot Predicted vs Calculated Kcal Burn
+    plt.figure(figsize=(10, 8))
+    plt.scatter(prediction_df['Predicted_Kcal_Burn'], prediction_df['calculated_power_kcal'], marker='o', color='#3b82f6', linestyle='None', edgecolor='k', alpha=0.7)
+    plt.xlabel('Predicted Kcal Burn (XGBoost Model)')
+    plt.ylabel('Calculated Kcal Burn (Power-Based)')
+    plt.title('XGB Predicted vs Calculated Kcal Burn')
+    plt.grid(True)
+    plt.show()
