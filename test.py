@@ -2,8 +2,74 @@ import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
+import pickle
 
 # --- 1. Synthetic Time Series Dataset Generation for Cycling ---
+
+def calories_hr(row):
+    HR = row['heart_rate']
+    weight_lbs = row['weight_lbs']
+    # Convert lb weight to kg
+    weight_kg = weight_lbs * 0.453592
+
+    # calculate the start time of the ride fort eh lap number form the df and calculate the current suration using the currnt timestamp
+    
+    
+    age = row['age']
+    
+    if row['sex'] == 'Female':
+        kcal_min = (-20.4022 + 0.4472*HR - 0.1263*weight_kg + 0.074*age) / 4.184
+    else: # Male
+        kcal_min = (-55.0969 + 0.6309*HR + 0.1988*weight_kg + 0.2017*age) / 4.184
+    
+    # Convert to calories for the current timestep
+    return kcal_min * (row['duration_sec'] / 60.0)
+
+
+
+
+def calories_power(row):
+    watts = row['power']
+    duration = row['duration_sec']
+    
+    # human mechanical efficiency ~24%
+    kcal = (watts * duration) / (0.24 * 4184)
+    return kcal
+
+def calculate_duration_from_lap_start(df):
+    """
+    Calculate duration in seconds from the start of each lap for every record.
+    Handles mixed datetime formats and missing values - without nested functions.
+    """
+    df = df.copy()
+    
+    # Ensure timestamp is datetime - handle mixed formats
+    try:
+        df['timestamp'] = pd.to_datetime(df['timestamp'], format='mixed', errors='coerce', utc=True)
+    except:
+        # Fallback for older pandas versions
+        df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce', infer_datetime_format=True, utc=True)
+    
+    # Remove rows with invalid timestamps
+    initial_count = len(df)
+    df = df.dropna(subset=['timestamp'])
+    if len(df) < initial_count:
+        print(f"Warning: Removed {initial_count - len(df)} rows with invalid timestamps")
+    
+    # Sort by lap and timestamp to ensure proper chronological order
+    df = df.sort_values(['lap', 'timestamp']).reset_index(drop=True)
+    
+    # Calculate start time for each lap
+    lap_start_times = df.groupby('lap')['timestamp'].min()
+    
+    # Map start times back to each record and calculate duration
+    df['lap_start_time'] = df['lap'].map(lap_start_times)
+    df['duration_sec'] = (df['timestamp'] - df['lap_start_time']).dt.seconds
+    
+    # Drop the temporary column
+    df = df.drop('lap_start_time', axis=1)
+    
+    return df
 
 def generate_cycling_data(route_distance_km=40, sample_rate_sec=5,weight_lbs = 150, age = 30, sex = 0, height = 5.9):
     """
