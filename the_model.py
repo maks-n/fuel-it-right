@@ -14,7 +14,6 @@ def calories_hr(row):
 
     # calculate the start time of the ride fort eh lap number form the df and calculate the current suration using the currnt timestamp
     
-    
     age = row['age']
     
     if row['sex'] == 'Female':
@@ -24,8 +23,6 @@ def calories_hr(row):
     
     # Convert to calories for the current timestep
     return kcal_min * (row['duration_sec'] / 60.0)
-
-
 
 
 def calories_power(row):
@@ -148,9 +145,6 @@ def generate_cycling_data(route_distance_km=40, sample_rate_sec=5,weight_lbs = 1
     cadence = (power / 2) + np.random.normal(0, 5, n_steps)
     cadence = np.clip(cadence, 50, 120).round(0).astype(int)
 
-
-
-
     df = pd.DataFrame({
         'timestamp': time_index,
         'Distance_km': distance_km.round(2),
@@ -172,8 +166,6 @@ def generate_cycling_data(route_distance_km=40, sample_rate_sec=5,weight_lbs = 1
 
     df_with_duration['calories_power'] = df_with_duration.apply(calories_power, axis=1)
     df_with_duration['calories_total'] = 0.7*df_with_duration['calories_hr'] + 0.3*df_with_duration['calories_power']
-
-
 
     # df_with_duration.set_index('timestamp', inplace=True)
     print(f"--- Generated Synthetic Cycling Data ({route_distance_km}km Ride) ---")
