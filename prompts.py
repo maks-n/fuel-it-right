@@ -9,9 +9,9 @@ A list of timestamped kcal and water consumption.
 
 Output example:
 A list of notifications with recommendations of which type of food to take.
-"Notification 1: At 00:20 eat small banana (kcal: 100)"
-"Notification 2: At 00:30 eat energy gel (kcal: 200)"
-"Notification 3: At 00:50 eat a protein bar (kcal: 150)"
+"Notification 1: At 00:20 eat small banana (kcal: 50)"
+"Notification 2: At 00:30 eat energy gel (kcal: 150)"
+"Notification 3: At 00:50 eat a protein bar (kcal: 200)"
 
 Write the actual output into a file "notifications.txt".
 

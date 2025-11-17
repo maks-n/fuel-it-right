@@ -17,15 +17,15 @@ def fuel_model():
     model_result = []
 
     fake_noticiation_1 = f"Timestamp: 00:20, kcal: 100"
-    fake_noticiation_2 = f"Timestamp: 00:30, kcal: 200"
+    fake_noticiation_2 = f"Timestamp: 00:30, kcal: 50"
     fake_noticiation_3 = f"Timestamp: 00:50, kcal: 150"
-    fake_noticiation_4 = f"Timestamp: 01:10, kcal: 200"
-    fake_noticiation_5 = f"Timestamp: 01:30, kcal: 250"
-    fake_noticiation_6 = f"Timestamp: 01:50, kcal: 300"
-    fake_noticiation_7 = f"Timestamp: 02:10, kcal: 350"
-    fake_noticiation_8 = f"Timestamp: 02:30, kcal: 400"
-    fake_noticiation_9 = f"Timestamp: 02:50, kcal: 250"
-    fake_noticiation_10 = f"Timestamp: 03:10, kcal: 100"
+    fake_noticiation_4 = f"Timestamp: 01:10, kcal: 80"
+    fake_noticiation_5 = f"Timestamp: 01:30, kcal: 180"
+    fake_noticiation_6 = f"Timestamp: 01:50, kcal: 100"
+    fake_noticiation_7 = f"Timestamp: 02:10, kcal: 50"
+    fake_noticiation_8 = f"Timestamp: 02:30, kcal: 120"
+    fake_noticiation_9 = f"Timestamp: 02:40, kcal: 100"
+    fake_noticiation_10 = f"Timestamp: 03:00, kcal: 50"
 
     model_result.append(fake_noticiation_1)
     model_result.append(fake_noticiation_2)
